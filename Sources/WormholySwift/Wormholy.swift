@@ -138,6 +138,21 @@ public class Wormholy: NSObject
         
         return true
     }()
+    
+    /// Presents Wormholy UI from the given view controller, or from the top-most if nil.
+    @objc public static func presentWormholy(from viewController: UIViewController? = nil) {
+        // Check if RequestsView is already presented
+        let presentingVC = viewController ?? UIViewController.currentViewController()
+        if let currentViewController = presentingVC,
+           currentViewController is UIHostingController<RequestsView> {
+            // RequestsView is already presented, do nothing
+            return
+        }
+        let requestsView = RequestsView()
+        let hostingController = UIHostingController(rootView: requestsView)
+        hostingController.modalPresentationStyle = .fullScreen
+        presentingVC?.present(hostingController, animated: true, completion: nil)
+    }
 }
 
 /// WormholyConstructor calls this to initialize library

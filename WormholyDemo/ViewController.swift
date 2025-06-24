@@ -65,5 +65,9 @@ class ViewController: UIViewController {
             print("ERROR: api Get photos")
         }
     }
+    
+    @IBAction func showWormholyButtonPressed(_ sender: Any) {
+        Wormholy.presentWormholy(from: self)
+    }
 }
 
